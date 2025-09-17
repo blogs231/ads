@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KaSin TV: Live Sports </title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">KaSin TV</a>
+        </div>
+    </header>
+
+	
+
+<main class="container">
+        <section class="player-section">
+            <div class="player-container">
+                <div class="disclaimer">
+                    <span class="disclaimer-text">Skip 1-2 Ads | Watch Peacefully</span>
+                </div>
+                
+                <div class="fullscreen-container">
+                    <button class="fullscreen-toggle" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                        <i class="fas fa-expand"></i> Fullscreen
+                    </button>
+                </div>
+
+                <!-- Leaderboard Ad (Above Player) -->
+                <div class="leaderboard dashboard-leaderboard">
+                    <div class="row no-margin">
+                        <div class="column full-width">
+                            <div class="pages-leaderboard">
+                                <img src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ <!-- Mobile Ad -->
+                <div class="mobile-ad">
+                    <img src="kasin2.png" alt="Advertisement" class="mobile-ad-image">
+                </div>
+            </div>
+                <div class="player-wrapper">
+                    <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen="true" frameborder="0" height="500" width="100%"></iframe>
+                    <div id="jwPlayer" style="display: none;"></div>
+                </div>
+ <!-- Leaderboard Ad (Above Player) -->
+                <div class="leaderboard dashboard-leaderboard">
+                    <div class="row no-margin">
+                        <div class="column full-width">
+                            <div class="pages-leaderboard">
+                                <img src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Ad -->
+                <div class="mobile-ad">
+                    <img src="kasin2.png" alt="Advertisement" class="mobile-ad-image">
+                </div>
+            </div>
+
+        </section>
+
+        <section class="dmca-section">
+            <h2>KaSin TV - DMCA</h2>
+            <p>KaSin TV does not host any media content on its own site. Our site visitors may use external or third-party services to show content. We notify all copyright owners that the links and media shared by visitors are hosted elsewhere on the web or embedded from various sites.</p>
+            <h3>What is KaSin TV?</h3>
+            <p>KaSin TV is a sports streaming platform covering Cricket Matches, World Cup, International/Domestic Matches, Football Matches, and more.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 KaSin TV. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+    function toggleFullscreen() {
+        var videoEl = document.getElementById('hlsVideo');
+        var iframeEl = document.getElementById('iframe');
+        var target = (videoEl && videoEl.style.display !== 'none') ? videoEl : iframeEl;
+
+        if (!document.fullscreenElement) {
+            if (target && target.requestFullscreen) {
+                target.requestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    (function () {
+        var params = new URLSearchParams(window.location.search);
+        var url = params.get('url');
+        var iframeEl = document.getElementById('iframe');
+        var playerWrapper = document.querySelector('.player-wrapper');
+        if (!url) return;
+
+        function isM3U8(u) {
+            return /\.m3u8(\?|#|$)/i.test(u);
+        }
+
+        if (isM3U8(url)) {
+            // Hide iframe and create a video element for HLS
+            iframeEl.style.display = 'none';
+            var video = document.createElement('video');
+            video.id = 'hlsVideo';
+            video.controls = true;
+            video.autoplay = true;
+            video.playsInline = true;
+            video.style.width = '100%';
+            video.style.height = '500px';
+            playerWrapper.appendChild(video);
+
+            if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+            } else if (window.Hls) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+            } else {
+                // Fallback: load in iframe if HLS is unavailable
+                iframeEl.style.display = '';
+                iframeEl.src = url;
+            }
+        } else {
+            // Non-HLS: load directly in iframe
+            iframeEl.src = url;
+        }
+    })();
+    </script>
+</body>
+</html>
