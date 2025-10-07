@@ -1,123 +1,194 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KaSin TV: Live Sports</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KaSin TV: Live Sports</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #000;
+    }
+
+    .header {
+      background: #141414;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .player-section {
+      margin-top: 20px;
+    }
+
+    .leaderboard {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .leaderboard-image {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .mobile-ad {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .mobile-ad-image {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 10px;
+    }
+
+    .fullscreen-container {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    .fullscreen-toggle {
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Make leaderboard ads visible in mobile view too */
+    @media (max-width: 768px) {
+      .leaderboard-image {
+        max-height: 180px;
+      }
+    }
+
+    .footer {
+      background: #141414;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+
+    .dmca-section {
+      margin: 30px 0;
+      padding: 0 10px;
+      text-align: center;
+    }
+
+    /* Optional: smooth ad fade effect */
+    .leaderboard-image,
+    .mobile-ad-image {
+      transition: opacity 0.6s ease-in-out;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body>
-<header class="header">
-    <div class="container">
-        <a href="https://cutt.ly/Tr06bSNB" class="logo">KaSin TV</a>
-    </div>
-</header>
+  <header class="header">
+    <a href="https://cutt.ly/Tr06bSNB" class="logo">KaSin TV</a>
+  </header>
 
-<main class="container">
+  <main class="container">
     <section class="player-section">
-        <div class="player-container">
-            <div class="disclaimer">
-                <span class="disclaimer-text">Skip 1-2 Ads | Watch Peacefully</span>
-            </div>
+      <div class="disclaimer" style="text-align:center; color:red;">
+        Skip 1-2 Ads | Watch Peacefully
+      </div>
 
-            <div class="fullscreen-container">
-                <button class="fullscreen-toggle" onclick="toggleFullscreen()" title="Toggle Fullscreen">
-                    <i class="fas fa-expand"></i> Fullscreen
-                </button>
-            </div>
+      <div class="fullscreen-container">
+        <button class="fullscreen-toggle" onclick="toggleFullscreen()">
+          <i class="fas fa-expand"></i> Fullscreen
+        </button>
+      </div>
 
-            <!-- ===== Rotating Leaderboard Ad (Above Player) ===== -->
-            <div class="leaderboard dashboard-leaderboard">
-                <div class="row no-margin">
-                    <div class="column full-width">
-                        <div class="pages-leaderboard">
-                            <a id="leaderAdLink" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-                                <img id="leaderAdImage" src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- ===== Rotating Leaderboard Ad (Above Player) ===== -->
+      <div class="leaderboard dashboard-leaderboard">
+        <a id="leaderAdLink" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
+          <img id="leaderAdImage" src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
+        </a>
+      </div>
 
-            <!-- ===== Rotating Mobile Ad ===== -->
-            <div class="mobile-ad">
-                <a id="mobileAdLink" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-                    <img id="mobileAdImage" src="Kasin2.png" alt="Mobile Advertisement" class="mobile-ad-image" />
-                </a>
-            </div>
-        </div>
+      <!-- ===== Rotating Mobile Ad ===== -->
+      <div class="mobile-ad">
+        <a id="mobileAdLink" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
+          <img id="mobileAdImage" src="Kasin2.png" alt="Mobile Advertisement" class="mobile-ad-image" />
+        </a>
+      </div>
 
-        <div class="player-wrapper">
-            <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen="true" frameborder="0" height="500" width="100%"></iframe>
-            <div id="jwPlayer" style="display: none;"></div>
-        </div>
+      <div class="player-wrapper">
+        <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen="true" frameborder="0" height="500" width="100%"></iframe>
+      </div>
 
-        <!-- ===== Another Rotating Leaderboard Below Player ===== -->
-        <div class="leaderboard dashboard-leaderboard">
-            <div class="row no-margin">
-                <div class="column full-width">
-                    <div class="pages-leaderboard">
-                        <a id="leaderAdLink2" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-                            <img id="leaderAdImage2" src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <!-- ===== Another Rotating Leaderboard Below Player ===== -->
+      <div class="leaderboard dashboard-leaderboard">
+        <a id="leaderAdLink2" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
+          <img id="leaderAdImage2" src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
+        </a>
+      </div>
 
-        <!-- ===== Another Rotating Mobile Ad Below Player ===== -->
-        <div class="mobile-ad">
-            <a id="mobileAdLink2" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-                <img id="mobileAdImage2" src="Kasin2.png" alt="Mobile Advertisement" class="mobile-ad-image" />
-            </a>
-        </div>
+      <!-- ===== Another Rotating Mobile Ad Below Player ===== -->
+      <div class="mobile-ad">
+        <a id="mobileAdLink2" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
+          <img id="mobileAdImage2" src="Kasin2.png" alt="Mobile Advertisement" class="mobile-ad-image" />
+        </a>
+      </div>
     </section>
 
     <section class="dmca-section">
-        <h2>KaSin TV - DMCA</h2>
-        <p>KaSin TV does not host any media content on its own site. Our site visitors may use external or third-party services to show content. We notify all copyright owners that the links and media shared by visitors are hosted elsewhere on the web or embedded from various sites.</p>
-        <h3>What is KaSin TV?</h3>
-        <p>KaSin TV is a sports streaming platform covering Cricket Matches, World Cup, International/Domestic Matches, Football Matches, and more.</p>
+      <h2>KaSin TV - DMCA</h2>
+      <p>KaSin TV does not host any media content on its own site. Our site visitors may use external or third-party services to show content. We notify all copyright owners that the links and media shared by visitors are hosted elsewhere on the web or embedded from various sites.</p>
+      <h3>What is KaSin TV?</h3>
+      <p>KaSin TV is a sports streaming platform covering Cricket Matches, World Cup, International/Domestic Matches, Football Matches, and more.</p>
     </section>
-</main>
+  </main>
 
-<footer class="footer">
-    <div class="container">
-        <p>© 2025 KaSin TV. All rights reserved.</p>
-    </div>
-</footer>
+  <footer class="footer">
+    © 2025 KaSin TV. All rights reserved.
+  </footer>
 
-<!-- ======= Scripts ======= -->
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script>
-function toggleFullscreen() {
-    var videoEl = document.getElementById('hlsVideo');
-    var iframeEl = document.getElementById('iframe');
-    var target = (videoEl && videoEl.style.display !== 'none') ? videoEl : iframeEl;
-
-    if (!document.fullscreenElement) {
-        if (target && target.requestFullscreen) target.requestFullscreen();
-    } else {
-        if (document.exitFullscreen) document.exitFullscreen();
+  <!-- ======= Scripts ======= -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    function toggleFullscreen() {
+      var videoEl = document.getElementById('hlsVideo');
+      var iframeEl = document.getElementById('iframe');
+      var target = (videoEl && videoEl.style.display !== 'none') ? videoEl : iframeEl;
+      if (!document.fullscreenElement) target.requestFullscreen?.();
+      else document.exitFullscreen?.();
     }
-}
 
-// ======= HLS / Iframe Loader =======
-(function () {
-    var params = new URLSearchParams(window.location.search);
-    var url = params.get('url');
-    var iframeEl = document.getElementById('iframe');
-    var playerWrapper = document.querySelector('.player-wrapper');
-    if (!url) return;
+    // HLS loader
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const url = params.get('url');
+      const iframeEl = document.getElementById('iframe');
+      const playerWrapper = document.querySelector('.player-wrapper');
+      if (!url) return;
+      function isM3U8(u) { return /\.m3u8(\?|#|$)/i.test(u); }
 
-    function isM3U8(u) { return /\.m3u8(\?|#|$)/i.test(u); }
-
-    if (isM3U8(url)) {
+      if (isM3U8(url)) {
         iframeEl.style.display = 'none';
-        var video = document.createElement('video');
+        const video = document.createElement('video');
         video.id = 'hlsVideo';
         video.controls = true;
         video.autoplay = true;
@@ -125,59 +196,55 @@ function toggleFullscreen() {
         video.style.width = '100%';
         video.style.height = '500px';
         playerWrapper.appendChild(video);
-
         if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = url;
+          video.src = url;
         } else if (window.Hls) {
-            var hls = new Hls();
-            hls.loadSource(url);
-            hls.attachMedia(video);
-        } else {
-            iframeEl.style.display = '';
-            iframeEl.src = url;
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
         }
-    } else {
+      } else {
         iframeEl.src = url;
+      }
+    })();
+
+    // ===== Rotating Ads =====
+    const leaderboardAds = [
+      { img: 'kasin1.jpg', link: 'https://sms.gw/fRh' },
+      { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' },
+      { img: 'kasin1.jpg', link: 'https://sms.gw/xHu' },
+      { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' }
+    ];
+
+    const mobileAds = [
+      { img: 'Kasin2.png', link: 'https://sms.gw/fRh' },
+      { img: 'Kasin2.png', link: 'https://sms.gw/gVs' },
+      { img: 'Kasin2.png', link: 'https://sms.gw/xHu' },
+      { img: 'Kasin2.png', link: 'https://sms.gw/c0c' }
+    ];
+
+    function preload(list) { list.forEach(a => { const i = new Image(); i.src = a.img; }); }
+    preload(leaderboardAds); preload(mobileAds);
+
+    function setupRotation(imgId, linkId, adsList) {
+      let index = 0;
+      const imgEl = document.getElementById(imgId);
+      const linkEl = document.getElementById(linkId);
+      setInterval(() => {
+        imgEl.classList.add('fade-out');
+        setTimeout(() => {
+          index = (index + 1) % adsList.length;
+          imgEl.src = adsList[index].img;
+          linkEl.href = adsList[index].link;
+          imgEl.classList.remove('fade-out');
+        }, 500);
+      }, 10000);
     }
-})();
 
-// ======= Rotating Ads (Leaderboard + Mobile) =======
-const leaderboardAds = [
-    { img: 'kasin1.jpg', link: 'https://sms.gw/fRh' },
-     { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' },
-    { img: 'kasin1.jpg', link: 'https://sms.gw/xHu' },
-    { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' }
-];
-
-const mobileAds = [
-    { img: 'Kasin2.png', link: 'https://sms.gw/fRh' },
-    { img: 'Kasin2.png', link: 'https://sms.gw/gVs' },
-    { img: 'Kasin2.png', link: 'https://sms.gw/xHu' },
-    { img: 'Kasin2.png', link: 'https://sms.gw/c0c' }
-];
-
-function preload(list) { list.forEach(item => { const i = new Image(); i.src = item.img; }); }
-preload(leaderboardAds);
-preload(mobileAds);
-
-function setupRotation(imgId, linkId, adsList) {
-    let index = 0;
-    const imgEl = document.getElementById(imgId);
-    const linkEl = document.getElementById(linkId);
-    setInterval(() => {
-        index = (index + 1) % adsList.length;
-        imgEl.src = adsList[index].img;
-        linkEl.href = adsList[index].link;
-    }, 10000);
-}
-
-// Apply rotation to all ad spots
-setupRotation('leaderAdImage', 'leaderAdLink', leaderboardAds);
-setupRotation('leaderAdImage2', 'leaderAdLink2', leaderboardAds);
-setupRotation('mobileAdImage', 'mobileAdLink', mobileAds);
-setupRotation('mobileAdImage2', 'mobileAdLink2', mobileAds);
-</script>
+    setupRotation('leaderAdImage', 'leaderAdLink', leaderboardAds);
+    setupRotation('leaderAdImage2', 'leaderAdLink2', leaderboardAds);
+    setupRotation('mobileAdImage', 'mobileAdLink', mobileAds);
+    setupRotation('mobileAdImage2', 'mobileAdLink2', mobileAds);
+  </script>
 </body>
 </html>
-
-
