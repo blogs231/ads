@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KaSin TV: Live Sports</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     body {
@@ -33,7 +33,7 @@
       margin-top: 20px;
     }
 
-    .leaderboard {
+    .leaderboard, .mobile-ad, .mobile-banner {
       text-align: center;
       margin: 15px 0;
     }
@@ -45,15 +45,27 @@
       border-radius: 10px;
     }
 
-    .mobile-ad {
-      text-align: center;
-      margin: 15px 0;
-    }
-
     .mobile-ad-image {
       width: 100%;
       max-width: 480px;
       border-radius: 10px;
+    }
+
+    .mobile-banner img {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Responsive visibility */
+    @media (min-width: 769px) {
+      .mobile-ad, .mobile-banner { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .leaderboard { display: none; }
+      .mobile-ad-image { max-height: 180px; }
     }
 
     .fullscreen-container {
@@ -71,13 +83,6 @@
       font-size: 14px;
     }
 
-    /* Make leaderboard ads visible in mobile view too */
-    @media (max-width: 768px) {
-      .leaderboard-image {
-        max-height: 180px;
-      }
-    }
-
     .footer {
       background: #141414;
       color: white;
@@ -92,15 +97,11 @@
       text-align: center;
     }
 
-    /* Optional: smooth ad fade effect */
-    .leaderboard-image,
-    .mobile-ad-image {
+    /* Fade for rotation */
+    .leaderboard-image, .mobile-ad-image {
       transition: opacity 0.6s ease-in-out;
     }
-
-    .fade-out {
-      opacity: 0;
-    }
+    .fade-out { opacity: 0; }
   </style>
 </head>
 
@@ -112,7 +113,7 @@
   <main class="container">
     <section class="player-section">
       <div class="disclaimer" style="text-align:center; color:red;">
-        Skip 1-2 Ads | Watch Peacefully
+        Skip 1–2 Ads | Watch Peacefully
       </div>
 
       <div class="fullscreen-container">
@@ -121,44 +122,58 @@
         </button>
       </div>
 
-      <!-- ===== Rotating Leaderboard Ad (Above Player) ===== -->
-      <div class="leaderboard dashboard-leaderboard">
-        <a id="leaderAdLink" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-          <img id="leaderAdImage" src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
+      <!-- Desktop Leaderboard -->
+      <div class="leaderboard">
+        <a id="leaderAdLink" href="https://sms.gw/fRh" target="_blank">
+          <img id="leaderAdImage" src="kasin1.jpg" alt="Ad" class="leaderboard-image">
         </a>
       </div>
 
-      <!-- ===== Rotating Mobile Ad ===== -->
+      <!-- Mobile Ads -->
       <div class="mobile-ad">
-        <a id="mobileAdLink" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-          <img id="mobileAdImage" src="Kasin2.png" alt="Mobile Advertisement" class="mobile-ad-image" />
+        <a id="mobileAdLink" href="https://sms.gw/fRh" target="_blank">
+          <img id="mobileAdImage" src="Kasin2.png" alt="Mobile Ad" class="mobile-ad-image">
+        </a>
+      </div>
+
+      <!-- NEW: kasintv2.gif banner for mobile -->
+      <div class="mobile-banner">
+        <a href="https://cutt.ly/Tr06bSNB" target="_blank">
+          <img src="kasintv2.gif" alt="KaSin TV Banner Ad">
         </a>
       </div>
 
       <div class="player-wrapper">
-        <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen="true" frameborder="0" height="500" width="100%"></iframe>
+        <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen frameborder="0" height="500" width="100%"></iframe>
       </div>
 
-      <!-- ===== Another Rotating Leaderboard Below Player ===== -->
-      <div class="leaderboard dashboard-leaderboard">
-        <a id="leaderAdLink2" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-          <img id="leaderAdImage2" src="kasin1.jpg" alt="Advertisement" class="leaderboard-image">
+      <!-- Desktop Leaderboard Below -->
+      <div class="leaderboard">
+        <a id="leaderAdLink2" href="https://sms.gw/fRh" target="_blank">
+          <img id="leaderAdImage2" src="kasin1.jpg" alt="Ad" class="leaderboard-image">
         </a>
       </div>
 
-      <!-- ===== Another Rotating Mobile Ad Below Player ===== -->
+      <!-- Mobile Ads Below -->
       <div class="mobile-ad">
-        <a id="mobileAdLink2" href="https://sms.gw/fRh" target="_blank" rel="noopener noreferrer">
-          <img id="mobileAdImage2" src="Kasin2.png" alt="Mobile Advertisement" class="mobile-ad-image" />
+        <a id="mobileAdLink2" href="https://sms.gw/fRh" target="_blank">
+          <img id="mobileAdImage2" src="Kasin2.png" alt="Mobile Ad" class="mobile-ad-image">
+        </a>
+      </div>
+
+      <!-- Second kasintv2.gif banner below player -->
+      <div class="mobile-banner">
+        <a href="https://cutt.ly/Tr06bSNB" target="_blank">
+          <img src="kasintv2.gif" alt="KaSin TV Banner Ad">
         </a>
       </div>
     </section>
 
     <section class="dmca-section">
       <h2>KaSin TV - DMCA</h2>
-      <p>KaSin TV does not host any media content on its own site. Our site visitors may use external or third-party services to show content. We notify all copyright owners that the links and media shared by visitors are hosted elsewhere on the web or embedded from various sites.</p>
+      <p>KaSin TV does not host any media content on its own site. All media shown are from external or third-party services.</p>
       <h3>What is KaSin TV?</h3>
-      <p>KaSin TV is a sports streaming platform covering Cricket Matches, World Cup, International/Domestic Matches, Football Matches, and more.</p>
+      <p>KaSin TV is a sports streaming platform featuring Cricket, World Cup, Football, and more.</p>
     </section>
   </main>
 
@@ -166,9 +181,9 @@
     © 2025 KaSin TV. All rights reserved.
   </footer>
 
-  <!-- ======= Scripts ======= -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
+    // Fullscreen toggle
     function toggleFullscreen() {
       var videoEl = document.getElementById('hlsVideo');
       var iframeEl = document.getElementById('iframe');
@@ -177,7 +192,7 @@
       else document.exitFullscreen?.();
     }
 
-    // HLS loader
+    // Load HLS or Iframe
     (function () {
       const params = new URLSearchParams(window.location.search);
       const url = params.get('url');
@@ -208,7 +223,7 @@
       }
     })();
 
-    // ===== Rotating Ads =====
+    // ===== Ad Rotations =====
     const leaderboardAds = [
       { img: 'kasin1.jpg', link: 'https://sms.gw/fRh' },
       { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' },
