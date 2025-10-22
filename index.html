@@ -6,7 +6,7 @@
   <title>KaSin TV: Live Sports</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script type='text/javascript' src='//smallestpawsmention.com/5b/28/ce/5b28ce786ec5e459042420096c03022c.js'></script>
+  <script type='text/javascript' src='//smallestpawsmention.com/5b/28/ce/5b28ce786ec5e459042420096c03022c.js'></script>
   <style>
     body {
       margin: 0;
@@ -29,14 +29,13 @@
       text-decoration: none;
     }
 
-    /* Container for centered content with responsive width */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto; /* centers content */
-  padding: 0 15px; /* small padding for mobile */
-  box-sizing: border-box;
-}
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
 
     .player-section {
       margin-top: 20px;
@@ -67,7 +66,6 @@
       border-radius: 10px;
     }
 
-    /* Responsive visibility */
     @media (min-width: 769px) {
       .mobile-ad, .mobile-banner { display: none; }
     }
@@ -106,11 +104,23 @@
       text-align: center;
     }
 
-    /* Fade for rotation */
     .leaderboard-image, .mobile-ad-image {
       transition: opacity 0.6s ease-in-out;
     }
+
     .fade-out { opacity: 0; }
+
+    /* Universal ad styling */
+    .universal-ad {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .universal-ad img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
   </style>
 </head>
 
@@ -131,24 +141,10 @@
         </button>
       </div>
 
-      <!-- Desktop Leaderboard -->
-      <div class="leaderboard">
-        <a id="leaderAdLink" href="https://sms.gw/fRh" target="_blank">
-          <img id="leaderAdImage" src="kasin1.jpg" alt="Ad" class="leaderboard-image">
-        </a>
-      </div>
-
-      <!-- Mobile Ads -->
-      <div class="mobile-ad">
-        <a id="mobileAdLink" href="https://sms.gw/fRh" target="_blank">
-          <img id="mobileAdImage" src="Kasin2.png" alt="Mobile Ad" class="mobile-ad-image">
-        </a>
-      </div>
-
-      <!-- NEW: kasintv2.gif banner for mobile -->
-      <div class="mobile-banner">
-        <a href="https://cutt.ly/Tr06bSNB" target="_blank">
-          <img src="kasintv2.gif" alt="KaSin TV Banner Ad">
+      <!-- Universal Ad (Above Player) -->
+      <div class="universal-ad">
+        <a href="https://cutt.ly/Tr06bSNB" target="_blank" rel="noopener noreferrer">
+          <img src="https://blogs231.github.io/ads/kasintv2.gif" alt="KaSin TV Ad" class="leaderboard-image">
         </a>
       </div>
 
@@ -156,24 +152,10 @@
         <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen frameborder="0" height="500" width="100%"></iframe>
       </div>
 
-      <!-- Desktop Leaderboard Below -->
-      <div class="leaderboard">
-        <a id="leaderAdLink2" href="https://sms.gw/fRh" target="_blank">
-          <img id="leaderAdImage2" src="kasin1.jpg" alt="Ad" class="leaderboard-image">
-        </a>
-      </div>
-
-      <!-- Mobile Ads Below -->
-      <div class="mobile-ad">
-        <a id="mobileAdLink2" href="https://sms.gw/fRh" target="_blank">
-          <img id="mobileAdImage2" src="Kasin2.png" alt="Mobile Ad" class="mobile-ad-image">
-        </a>
-      </div>
-
-      <!-- Second kasintv2.gif banner below player -->
-      <div class="mobile-banner">
-        <a href="https://cutt.ly/Tr06bSNB" target="_blank">
-          <img src="kasintv2.gif" alt="KaSin TV Banner Ad">
+      <!-- Universal Ad (Below Player) -->
+      <div class="universal-ad">
+        <a href="https://cutt.ly/Tr06bSNB" target="_blank" rel="noopener noreferrer">
+          <img src="https://blogs231.github.io/ads/kasintv2.gif" alt="KaSin TV Ad" class="leaderboard-image">
         </a>
       </div>
     </section>
@@ -192,7 +174,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    // Fullscreen toggle
     function toggleFullscreen() {
       var videoEl = document.getElementById('hlsVideo');
       var iframeEl = document.getElementById('iframe');
@@ -201,7 +182,6 @@
       else document.exitFullscreen?.();
     }
 
-    // Load HLS or Iframe
     (function () {
       const params = new URLSearchParams(window.location.search);
       const url = params.get('url');
@@ -231,46 +211,6 @@
         iframeEl.src = url;
       }
     })();
-
-    // ===== Ad Rotations =====
-    const leaderboardAds = [
-      { img: 'kasin1.jpg', link: 'https://sms.gw/fRh' },
-      { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' },
-      { img: 'kasin1.jpg', link: 'https://sms.gw/xHu' },
-      { img: 'kasintv2.gif', link: 'https://cutt.ly/Tr06bSNB' }
-    ];
-
-    const mobileAds = [
-      { img: 'Kasin2.png', link: 'https://sms.gw/fRh' },
-      { img: 'Kasin2.png', link: 'https://sms.gw/gVs' },
-      { img: 'Kasin2.png', link: 'https://sms.gw/xHu' },
-      { img: 'Kasin2.png', link: 'https://sms.gw/c0c' }
-    ];
-
-    function preload(list) { list.forEach(a => { const i = new Image(); i.src = a.img; }); }
-    preload(leaderboardAds); preload(mobileAds);
-
-    function setupRotation(imgId, linkId, adsList) {
-      let index = 0;
-      const imgEl = document.getElementById(imgId);
-      const linkEl = document.getElementById(linkId);
-      setInterval(() => {
-        imgEl.classList.add('fade-out');
-        setTimeout(() => {
-          index = (index + 1) % adsList.length;
-          imgEl.src = adsList[index].img;
-          linkEl.href = adsList[index].link;
-          imgEl.classList.remove('fade-out');
-        }, 500);
-      }, 10000);
-    }
-
-    setupRotation('leaderAdImage', 'leaderAdLink', leaderboardAds);
-    setupRotation('leaderAdImage2', 'leaderAdLink2', leaderboardAds);
-    setupRotation('mobileAdImage', 'mobileAdLink', mobileAds);
-    setupRotation('mobileAdImage2', 'mobileAdLink2', mobileAds);
   </script>
 </body>
 </html>
-
-
