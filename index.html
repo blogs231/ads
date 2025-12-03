@@ -1,274 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KaSin TV: Live Sports</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script type='text/javascript' src='//smallestpawsmention.com/5b/28/ce/5b28ce786ec5e459042420096c03022c.js'></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: #fff;
-      color: #000;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KaSin TV: Live Sports</title>
+<link rel="icon" href="favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    .header {
-      background: #141414;
-      color: white;
-      padding: 15px 0;
-      text-align: center;
-    }
+<style>
+:root {
+--primary-color:#0a3d62;
+--secondary-color:#ffffff;
+--text-color:#1d1d1d;
+--background-color:#eef2f5;
+--dark-primary:#082a44;
+--dark-bg:#0d0f12;
+--dark-text:#d8d8d8;
+--border-radius:4px;
+--shadow:0 3px 10px rgba(0,0,0,0.12);
+--font-family:'Poppins',sans-serif;
+--title-font:'Merriweather',serif;
+--highlight-bg:#ffd08a;
+--highlight-text:#4f3205;
+--button-bg:#e67e22;
+--button-hover:#c46615;
+}
 
-    .logo {
-      font-size: 1.5em;
-      font-weight: 600;
-      color: #fff;
-      text-decoration: none;
-    }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-family);background:var(--background-color);color:var(--text-color);line-height:1.6;font-size:16px}
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+.header{background:var(--primary-color);padding:15px 0;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000}
+.header .container{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--title-font);font-size:28px;font-weight:700;color:var(--secondary-color);text-decoration:none}
+.mode-toggle{display:flex;align-items:center;gap:8px;padding:8px 16px;border:none;border-radius:var(--border-radius);background:var(--dark-primary);color:var(--secondary-color);font-weight:500;font-size:14px;cursor:pointer;transition:transform 0.2s,background-color 0.3s}
+.mode-toggle:hover{background:#0d47a1;transform:scale(1.05)}
+.player-section{margin:20px 0;background:var(--secondary-color);border-radius:var(--border-radius);padding:20px;box-shadow:var(--shadow)}
+.player-wrapper{position:relative}
+iframe{border-radius:var(--border-radius);width:100%;height:500px;border:0}
+.disclaimer{text-align:center;margin:15px 0;padding:12px 20px;background:var(--highlight-bg);color:var(--highlight-text);border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.disclaimer-text{font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:0.5px}
+.fullscreen-toggle{position:absolute;right:10px;top:10px;z-index:10;width:38px;height:38px;padding:0;border:none;border-radius:6px;background:var(--button-bg);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fullscreen-toggle:active{transform:scale(0.98)}
+.dmca-section{background:var(--secondary-color);padding:20px;border-radius:var(--border-radius);box-shadow:var(--shadow);margin-bottom:20px}
+.dmca-section h2{font-family:var(--title-font);font-size:26px;margin-bottom:15px;color:var(--primary-color)}
+.dmca-section h3{font-size:20px;margin:20px 0 10px}
+.footer{background:var(--primary-color);color:var(--secondary-color);padding:20px 0}
+.footer .container{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.footer-links{display:flex;list-style:none}
+.footer-links li{margin-right:20px}
+.footer-links a{color:var(--secondary-color);text-decoration:none;font-weight:500}
+.footer-links a:hover{text-decoration:underline}
+body.theme-dark{background:var(--dark-bg);color:var(--dark-text)}
+.theme-dark .header,.theme-dark .footer{background:#0d47a1}
+.theme-dark .player-section,.theme-dark .dmca-section{background:#263545}
+.theme-dark .disclaimer{background:#5a3e00;color:#ffe082}
+@media(max-width:768px){.container{padding:0 15px}}
+@media(max-width:480px){.logo{font-size:24px}.mode-toggle{font-size:13px;padding:8px 14px}}
+</style>
 
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-      box-sizing: border-box;
-    }
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"KaSin TV","url":"https://www.yosin-tv.net/"}</script>
 
-    .player-section {
-      margin-top: 20px;
+<script>
+// Toggle dark mode, update button text and icon
+function rdmode() {
+  try {
+    var body = document.body;
+    var isDark = body.classList.toggle('theme-dark');
+    var btn = document.querySelector('.mode-toggle');
+    if (!btn) return;
+    var icon = btn.querySelector('i');
+    var span = btn.querySelector('span');
+    if (isDark) {
+      icon.className = 'fas fa-sun';
+      span.textContent = 'Light Mode';
+      btn.setAttribute('aria-pressed','true');
+      btn.setAttribute('aria-label','Switch to light mode');
+    } else {
+      icon.className = 'fas fa-moon';
+      span.textContent = 'Dark Mode';
+      btn.setAttribute('aria-pressed','false');
+      btn.setAttribute('aria-label','Switch to dark mode');
     }
+  } catch (e) {
+    console.error('rdmode error', e);
+  }
+}
 
-    .leaderboard, .mobile-ad, .mobile-banner {
-      text-align: center;
-      margin: 15px 0;
-    }
+// Fullscreen toggle that works across devices
+function toggleFullscreen() {
+  var elem = document.querySelector('.player-wrapper') || document.documentElement;
+  if (!elem) return;
 
-    .leaderboard-image {
-      width: 100%;
-      max-height: 250px;
-      object-fit: contain;
-      border-radius: 10px;
-    }
+  var isFull = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 
-    .mobile-ad-image {
-      width: 100%;
-      max-width: 480px;
-      border-radius: 10px;
-    }
+  if (!isFull) {
+    if (elem.requestFullscreen) elem.requestFullscreen().catch(function(e){console.warn(e)});
+    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen().catch(function(e){console.warn(e)});
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    else if (document.msExitFullscreen) document.msExitFullscreen();
+  }
+}
 
-    .mobile-banner img {
-      width: 100%;
-      max-width: 720px;
-      height: auto;
-      border-radius: 10px;
-    }
+function applyUrlParam() {
+  var iframe = document.getElementById('iframe');
+  if (!iframe) return;
+  var params = new URLSearchParams(window.location.search);
+  var url = params.get('url');
+  if (!url) return;
+  // basic validation
+  try {
+    var parsed = new URL(url);
+    iframe.setAttribute('src', parsed.href);
+  } catch (e) {
+    // if not a valid absolute URL, do not set it
+    console.warn('Invalid url param', url);
+  }
+}
 
-    @media (min-width: 769px) {
-      .mobile-ad, .mobile-banner { display: none; }
-    }
+// Safe default iframe src for testing
+function ensureIframe() {
+  var iframe = document.getElementById('iframe');
+  if (!iframe) return;
+  if (!iframe.getAttribute('src')) {
+    var placeholder = 'data:text/html;charset=utf-8,' + encodeURIComponent('<!doctype html><html><head><meta charset="utf-8"><title>Player</title></head><body style="display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif">KaSin TV Player Placeholder</body></html>');
+    iframe.setAttribute('src', placeholder);
+  }
+}
 
-    @media (max-width: 768px) {
-      .leaderboard { display: none; }
-      .mobile-ad-image { max-height: 180px; }
-    }
-
-    .fullscreen-container {
-      text-align: right;
-      margin-bottom: 10px;
-    }
-
-    .fullscreen-toggle {
-      background: #222;
-      color: #fff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .footer {
-      background: #141414;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 0.9em;
-    }
-
-    .dmca-section {
-      margin: 30px 0;
-      padding: 0 10px;
-      text-align: center;
-    }
-
-    .leaderboard-image, .mobile-ad-image {
-      transition: opacity 0.6s ease-in-out;
-    }
-
-    .fade-out { opacity: 0; }
-
-    /* Universal ad styling */
-    .universal-ad {
-      text-align: center;
-      margin: 15px 0;
-    }
-
-    .universal-ad img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-  </style>
+// Initialize on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function(){
+  applyUrlParam();
+  ensureIframe();
+  var fsBtn = document.querySelector('.fullscreen-toggle');
+  if (fsBtn) fsBtn.setAttribute('aria-label','Toggle fullscreen');
+  var modeBtn = document.querySelector('.mode-toggle');
+  if (modeBtn) {
+    modeBtn.setAttribute('aria-pressed','false');
+    modeBtn.setAttribute('aria-label','Switch to dark mode');
+  }
+});
+</script>
 </head>
 
-<body>
-  <header class="header">
-    <a href="https://cutt.ly/Tr06bSNB" class="logo">KaSin TV</a>
-  </header>
-<!-- Follow/Profile link. This opens your Facebook profile page -->
-<a href="https://www.facebook.com/profile.php?id=61581908394912" target="_blank" rel="noopener noreferrer" class="fb-button">
-  Follow us on Facebook
+<body class="theme-light">
+<header class="header">
+<div class="container">
+<a href="/" class="logo">KaSin TV</a>
+<button class="mode-toggle" onclick="rdmode()" aria-pressed="false" aria-label="Switch to dark mode"><i class="fas fa-moon"></i><span>Dark Mode</span></button>
+</div>
+</header>
+
+<main class="container">
+<section class="player-section">
+<a style="display:block;font-size:18px;font-weight:500;text-align:center;border-radius:2px;padding:5px;background:#389ce9;color:#fff;text-decoration:none;" href="https://t.me/yosintvlive" target="_blank" rel="noopener noreferrer" aria-label="Join KaSin TV Telegram">
+<svg style="width:30px;height:30px;vertical-align:middle;margin:0 5px;" viewBox="0 0 21 18"><g fill="none"><path fill="#ffffff" d="M0.554,7.092 L19.117,0.078 C19.737,-0.156 20.429,0.156 20.663,0.776 C20.745,0.994 20.763,1.23 20.713,1.457 L17.513,16.059 C17.351,16.799 16.62,17.268 15.88,17.105 C15.696,17.065 15.523,16.987 15.37,16.877 L8.997,12.271 C8.614,11.994 8.527,11.458 8.805,11.074 C8.835,11.033 8.869,10.994 8.905,10.958 L15.458,4.661 C15.594,4.53 15.598,4.313 15.467,4.176 C15.354,4.059 15.174,4.037 15.036,4.125 L6.104,9.795 C5.575,10.131 4.922,10.207 4.329,10.002 L0.577,8.704 C0.13,8.55 -0.107,8.061 0.047,7.614 C0.131,7.374 0.316,7.182 0.554,7.092 Z"></path></g></svg>
+Join KaSin TV Telegram
 </a>
 
-<style>
-.fb-button {
-  display: block;
-  width: 100%;
-  background-color: #1877f2;
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 14px 0;
-  border-radius: 8px;
-  text-decoration: none;
-  text-align: center;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+<div class="disclaimer"><span class="disclaimer-text">Skip 1-2 Ads | Watch Peacefully</span></div>
 
-.fb-button:hover {
-  background-color: #145dbf;
-  transform: translateY(-2px);
-}
+<div class="player-wrapper" style="position:relative;width:100%;height:auto;">
+<button class="fullscreen-toggle" onclick="toggleFullscreen()" aria-label="Toggle fullscreen"><i class="fas fa-expand"></i></button>
 
-.fb-button:active {
-  background-color: #0e4a94;
-  transform: translateY(0);
-}
-</style>
+<iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen frameborder="0" height="500" loading="lazy" title="KaSin TV Player"></iframe>
+</section>
 
-  <main class="container">
-    <section class="player-section">
-      <div class="disclaimer" style="text-align:center; color:red;">
-        Skip 1–2 Ads | Watch Peacefully
-      </div>
+<section class="dmca-section">
+<h2>KaSin TV - DMCA</h2>
+<p>KaSin TV does not host media on its own site. Visitors use external sources.</p>
+<h3>What is KaSin TV</h3>
+<p>KaSin TV streams Cricket, Football and global sports events.</p>
+</section>
+</main>
 
-      <div class="fullscreen-container">
-        <button class="fullscreen-toggle" onclick="toggleFullscreen()">
-          <i class="fas fa-expand"></i> Fullscreen
-        </button>
-      </div>
-
-  
-
-      <div class="player-wrapper">
-        <iframe id="iframe" allow="encrypted-media; fullscreen" allowfullscreen frameborder="0" height="500" width="100%"></iframe>
-      </div>
-
-     
-    </section>
-<!-- Follow/Profile link. This opens your Facebook profile page -->
-<a href="https://www.facebook.com/profile.php?id=61581908394912" target="_blank" rel="noopener noreferrer" class="fb-button">
-  Follow us on Facebook
-</a>
-
-<style>
-.fb-button {
-  display: block;
-  width: 100%;
-  background-color: #1877f2;
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 14px 0;
-  border-radius: 8px;
-  text-decoration: none;
-  text-align: center;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.fb-button:hover {
-  background-color: #145dbf;
-  transform: translateY(-2px);
-}
-
-.fb-button:active {
-  background-color: #0e4a94;
-  transform: translateY(0);
-}
-</style>
-
-    <section class="dmca-section">
-      <h2>KaSin TV - DMCA</h2>
-      <p>KaSin TV does not host any media content on its own site. All media shown are from external or third-party services.</p>
-      <h3>What is KaSin TV?</h3>
-      <p>KaSin TV is a sports streaming platform featuring Cricket, World Cup, Football, and more.</p>
-    </section>
-  </main>
-
-  <footer class="footer">
-    © 2025 KaSin TV. All rights reserved.
-  </footer>
-<!-- BEGIN: Powered by Supercounters.com -->
-<center><script type="text/javascript" src="//widget.supercounters.com/ssl/online_i.js"></script><script type="text/javascript">sc_online_i(1723812,"ffffff","e61c1c");</script><!-- END: Powered by Supercounters.com -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    function toggleFullscreen() {
-      var videoEl = document.getElementById('hlsVideo');
-      var iframeEl = document.getElementById('iframe');
-      var target = (videoEl && videoEl.style.display !== 'none') ? videoEl : iframeEl;
-      if (!document.fullscreenElement) target.requestFullscreen?.();
-      else document.exitFullscreen?.();
-    }
-
-    (function () {
-      const params = new URLSearchParams(window.location.search);
-      const url = params.get('url');
-      const iframeEl = document.getElementById('iframe');
-      const playerWrapper = document.querySelector('.player-wrapper');
-      if (!url) return;
-      function isM3U8(u) { return /\.m3u8(\?|#|$)/i.test(u); }
-
-      if (isM3U8(url)) {
-        iframeEl.style.display = 'none';
-        const video = document.createElement('video');
-        video.id = 'hlsVideo';
-        video.controls = true;
-        video.autoplay = true;
-        video.playsInline = true;
-        video.style.width = '100%';
-        video.style.height = '500px';
-        playerWrapper.appendChild(video);
-        if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = url;
-        } else if (window.Hls) {
-          const hls = new Hls();
-          hls.loadSource(url);
-          hls.attachMedia(video);
-        }
-      } else {
-        iframeEl.src = url;
-      }
-    })();
-  </script>
+<footer class="footer">
+<div class="container">
+<ul class="footer-links">
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+</ul>
+<p>© 2025 KaSin TV. All rights reserved.</p>
+</div>
+</footer>
 </body>
 </html>
-
-
-
